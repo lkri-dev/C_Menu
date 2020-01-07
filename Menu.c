@@ -6,6 +6,8 @@
 Compiler notes
 gcc -o menu Menu.c -lncurses
 ./menu
+
+https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
 */
 
 //Global varialble
