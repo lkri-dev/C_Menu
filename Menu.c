@@ -8,6 +8,7 @@ gcc -o menu Menu.c -lncurses
 ./menu
 
 https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
+https://matt.sh/howto-c
 */
 
 //Global varialble
