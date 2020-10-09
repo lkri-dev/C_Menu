@@ -35,20 +35,41 @@ void PrintMenu () {
 	if (menuControl < 0) {
 		menuControl = 0;
 	}
+	if (menuControl > n_options-1) {
+		menuControl = n_options-1;
+	}
 	
 	for (int i = 0; i < n_options; ++i) {
 		if (menuControl == i) {
 			printf("\033[1;%dm", color);
 			printf("%s\n", menuOptions[i]);
 			
-			if (menuOptions[i] == "Exit") {
-			loopControl = false;
-			}
-			
 		} else {
 			printf("\033[0m");
 			printf("%s\n", menuOptions[i]);
 		}
+	}
+	switch(menuControl){
+		case 0: // "Menu"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+		
+		case 1: // "List"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+		
+		case 2: // "Unit Test"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+			
+		case 3: // "Init"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+			
+		case 4: // "Exit"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			loopControl = false;
+			break;
 	}
 }
 
@@ -78,7 +99,7 @@ int main() {
 				break;
 				
 			case 'e':
-				printf("exit");
+				printf("exit\n");
 				loopControl = false;
 				break;
 		}
