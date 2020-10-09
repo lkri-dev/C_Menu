@@ -29,7 +29,7 @@ int n_options = sizeof(menuOptions) / sizeof(char *); // contain size of menu op
  * PrintMenu 
  * Prints out menuOptions and hightlights based on menuControl.
 */
-void PrintMenu () {
+void PrintMenu (void) {
 	system("clear");
 	
 	if (menuControl < 0) {
@@ -49,7 +49,15 @@ void PrintMenu () {
 			printf("%s\n", menuOptions[i]);
 		}
 	}
-	switch(menuControl){
+}
+
+/*
+ * MenuControl 
+ * Calls PrintMenu and then controls the program flow based on menuControl.
+*/
+void MenuControl (void) {
+	PrintMenu();
+	switch (menuControl) {
 		case 0: // "Menu"
 			printf("Menu Option: %s\n", menuOptions[menuControl]);
 			break;
@@ -77,25 +85,24 @@ void PrintMenu () {
  * Main
  * Contain a switch case that controls menu based on console input.
 */
-int main() {
+int main(void) {
 	char c;
-	PrintMenu();
+	MenuControl();
 		
 	while (loopControl) {
 		printf("\033[0m");
 		
 		c = getchar();
 		
-		
 		switch(c){
 			case 'w':
 				--menuControl;
-				PrintMenu();
+				MenuControl();
 				break;
 			
 			case 's':
 				++menuControl;
-				PrintMenu();
+				MenuControl();
 				break;
 				
 			case 'e':
