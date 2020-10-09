@@ -4,6 +4,7 @@
 #include <curses.h>
 /*
 Compiler notes
+cd ~/c/Users/lkri/source/repos/ANSICMenu
 gcc -o menu Menu.c -lncurses
 ./menu
 
@@ -11,7 +12,7 @@ https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
 https://matt.sh/howto-c
 */
 
-//Global varialble
+//Global varialbles
 int menuControl = 0; //controls highlight in menu
 bool loopControl = true; //Controls while loop of program
 int color = 31; //sets color of highlighted text. 31 = red ; 32 = green ; 33 = yellow ; 34 = blue ; 35 = Magenta ; 36 = cyan.
@@ -43,6 +44,7 @@ void PrintMenu () {
 			if (menuOptions[i] == "Exit") {
 			loopControl = false;
 			}
+			
 		} else {
 			printf("\033[0m");
 			printf("%s\n", menuOptions[i]);
@@ -56,10 +58,13 @@ void PrintMenu () {
 */
 int main() {
 	char c;
+	PrintMenu();
 		
 	while (loopControl) {
 		printf("\033[0m");
+		
 		c = getchar();
+		
 		
 		switch(c){
 			case 'w':
@@ -69,7 +74,7 @@ int main() {
 			
 			case 's':
 				++menuControl;
-				PrintMenu(1);
+				PrintMenu();
 				break;
 				
 			case 'e':
