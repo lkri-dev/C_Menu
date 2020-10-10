@@ -69,9 +69,6 @@ void MenuControl (void) {
 void PrintMenu (void) {
 	system("clear");
 	
-	printf("Press 'w' and 's' to navigate the menu.\nPress 'e' to exit.\n");
-	printf("Press enter to select the red option.\n\n");
-	
 	if (menuControl < 0) {
 		menuControl = 0;
 	}
@@ -96,6 +93,11 @@ void PrintMenu (void) {
  * Contain a switch case that controls menu based on keypress input.
 */
 int main(void) {
+	printf("Press 'w' and 's' to navigate the menu.\n");
+	printf("Press 'e' to exit.\n");
+	printf("Press enter to select the red option.\n\n");
+	printf("Press any key to continue.\n");
+	keypress(0);
 	PrintMenu();
 		
 	while (loopControl) {
