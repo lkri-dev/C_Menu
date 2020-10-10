@@ -2,13 +2,17 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <curses.h>
+#include "keypress.h"
+
 /*
 Compiler notes
 cd ~/c/Users/lkri/source/repos/ANSICMenu
 gcc -o menu Menu.c -lncurses
 ./menu
 
+curses.h:
 https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
+
 https://matt.sh/howto-c
 */
 
@@ -92,23 +96,31 @@ int main(void) {
 	while (loopControl) {
 		printf("\033[0m");
 		
-		c = getchar();
+		//c = getchar();
 		
-		switch(c){
-			case 'w':
-				--menuControl;
-				MenuControl();
-				break;
-			
-			case 's':
-				++menuControl;
-				MenuControl();
-				break;
+		int hit = 0;
+		hit = keypress(0);
+ 
+		if (hit != 0)
+		{
+			printf("%d\n",hit);
+		
+			switch(hit){
+				case 119: //w
+					--menuControl;
+					MenuControl();
+					break;
 				
-			case 'e':
-				printf("exit\n");
-				loopControl = false;
-				break;
+				case 115: //s
+					++menuControl;
+					MenuControl();
+					break;
+					
+				case 101: //e
+					printf("exit\n");
+					loopControl = false;
+					break;
+			}
 		}
 	}
 }
