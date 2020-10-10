@@ -93,7 +93,7 @@ void PrintMenu (void) {
  * Contain a switch case that controls menu based on keypress input.
 */
 int main(void) {
-	printf("Press 'w' and 's' to navigate the menu.\n");
+	printf("Press 'w' and 's' or arrow up and down to navigate the menu.\n");
 	printf("Press 'e' to exit.\n");
 	printf("Press enter to select the red option.\n\n");
 	printf("Press any key to continue.\n");
@@ -108,11 +108,13 @@ int main(void) {
 		if (hit != 0)
 		{
 			switch(hit){
+				case 65:
 				case 119: //w or 65
 					--menuControl;
 					PrintMenu();
 					break;
 				
+				case 66:
 				case 115: //s or 66 
 					++menuControl;
 					PrintMenu();
