@@ -5,21 +5,25 @@
 #include "keypress.h"
 
 /*
+Author: lkri-dev 
+Source: https://github.com/lkri-dev/ANSICMenu
+
 Compiler notes
-cd ~/c/Users/lkri/source/repos/ANSICMenu
 gcc -o menu Menu.c -lncurses
 ./menu
 
-curses.h:
-https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
+Helpfull links:
+	curses.h:
+	https://courses.cs.washington.edu/courses/cse451/99wi/Section/gccintro.html
 
-https://matt.sh/howto-c
+	https://matt.sh/howto-c
 */
 
 //Global varialbles
 int menuControl = 0; //controls highlight in menu
 bool loopControl = true; //Controls while loop of program
 int color = 31; //sets color of highlighted text. 31 = red ; 32 = green ; 33 = yellow ; 34 = blue ; 35 = Magenta ; 36 = cyan.
+int hit = 0;
 char *menuOptions[] = { //contains the menu options
 	"Menu",
 	"List",
@@ -27,7 +31,36 @@ char *menuOptions[] = { //contains the menu options
 	"Init",
 	"Exit",
 };
-int n_options = sizeof(menuOptions) / sizeof(char *); // contain size of menu options
+int const n_options = sizeof(menuOptions) / sizeof(char *); // contain size of menu options
+
+/*
+ * MenuControl 
+ * Calls PrintMenu and then controls the program flow based on menuControl.
+*/
+void MenuControl (void) {
+	switch (menuControl) {
+		case 0: // "Menu"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+		
+		case 1: // "List"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+		
+		case 2: // "Unit Test"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+			
+		case 3: // "Init"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			break;
+			
+		case sizeof(menuOptions) / sizeof(char *) - 1: // "Exit"
+			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			loopControl = false;
+			break;
+	}
+}
 
 /*
  * PrintMenu 
@@ -35,6 +68,9 @@ int n_options = sizeof(menuOptions) / sizeof(char *); // contain size of menu op
 */
 void PrintMenu (void) {
 	system("clear");
+	
+	printf("Press 'w' and 's' to navigate the menu.\nPress 'e' to exit.\n");
+	printf("Press enter to select the red option.\n\n");
 	
 	if (menuControl < 0) {
 		menuControl = 0;
@@ -56,63 +92,31 @@ void PrintMenu (void) {
 }
 
 /*
- * MenuControl 
- * Calls PrintMenu and then controls the program flow based on menuControl.
-*/
-void MenuControl (void) {
-	PrintMenu();
-	switch (menuControl) {
-		case 0: // "Menu"
-			printf("Menu Option: %s\n", menuOptions[menuControl]);
-			break;
-		
-		case 1: // "List"
-			printf("Menu Option: %s\n", menuOptions[menuControl]);
-			break;
-		
-		case 2: // "Unit Test"
-			printf("Menu Option: %s\n", menuOptions[menuControl]);
-			break;
-			
-		case 3: // "Init"
-			printf("Menu Option: %s\n", menuOptions[menuControl]);
-			break;
-			
-		case 4: // "Exit"
-			printf("Menu Option: %s\n", menuOptions[menuControl]);
-			loopControl = false;
-			break;
-	}
-}
-
-/*
  * Main
- * Contain a switch case that controls menu based on console input.
+ * Contain a switch case that controls menu based on keypress input.
 */
 int main(void) {
-	char c;
-	MenuControl();
+	PrintMenu();
 		
 	while (loopControl) {
 		printf("\033[0m");
 		
-		//c = getchar();
-		
-		int hit = 0;
 		hit = keypress(0);
  
 		if (hit != 0)
 		{
-			printf("%d\n",hit);
-		
 			switch(hit){
-				case 119: //w
+				case 119: //w or 65
 					--menuControl;
-					MenuControl();
+					PrintMenu();
 					break;
 				
-				case 115: //s
+				case 115: //s or 66 
 					++menuControl;
+					PrintMenu();
+					break;
+				
+				case 10:
 					MenuControl();
 					break;
 					

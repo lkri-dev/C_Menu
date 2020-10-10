@@ -2,20 +2,21 @@
 #include <termios.h>
 #include <unistd.h>
 
-/* simply wait for a key to be pressed 
-printf("press a key to continue\n");
-keypress(0);
-*/
+/* 
+All rights: micheal.dipperstein.com
+Source: http://michael.dipperstein.com/keypress.html
 
-/* wait for the space bar 
-printf("hit the spacebar to continue\n");
-while (keypress(0) != ' ');
+simply wait for a key to be pressed 
+	printf("press a key to continue\n");
+	keypress(0);
+
+wait for the space bar 
+	printf("hit the spacebar to continue\n");
+	while (keypress(0) != ' ');
 */
 
 /* 
 sleep until a key is pressed and return value. echo = 0 disables key echo. 
-All rights: micheal.dipperstein.com
-Source: http://michael.dipperstein.com/keypress.html
 */
 int keypress(unsigned char echo)
 {
