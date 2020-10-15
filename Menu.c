@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <curses.h>
 #include "keypress.h"
+#include "bit_operations.h"
 
 /*
 Author: lkri-dev 
@@ -25,7 +26,7 @@ bool loopControl = true; //Controls while loop of program
 int color = 31; //sets color of highlighted text. 31 = red ; 32 = green ; 33 = yellow ; 34 = blue ; 35 = Magenta ; 36 = cyan.
 int hit = 0;
 char *menuOptions[] = { //contains the menu options
-	"Menu",
+	"Bit Operation examples",
 	"List",
 	"Unit Test",
 	"Init",
@@ -39,8 +40,9 @@ int const n_options = sizeof(menuOptions) / sizeof(char *); // contain size of m
 */
 void MenuControl (void) {
 	switch (menuControl) {
-		case 0: // "Menu"
+		case 0: // "Bit Operation examples"
 			printf("Menu Option: %s\n", menuOptions[menuControl]);
+			shift(0);
 			break;
 		
 		case 1: // "List"
@@ -98,6 +100,7 @@ int main(void) {
 	printf("Press enter to select the red option.\n\n");
 	printf("Press any key to continue.\n");
 	keypress(0);
+	menuControl = 0;
 	PrintMenu();
 		
 	while (loopControl) {
