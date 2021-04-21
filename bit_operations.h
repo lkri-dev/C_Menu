@@ -19,7 +19,7 @@ int shift (int a) {
 	printf("After a |= (1 << 6); //Set a bit %d\n", a);
 	
 	a &= ~(1 << 6); //clear a bit
-	check = bit_check_operation(a, 0);
+	check = bit_check_operation(a, 6);
 	printf("check bit %s \n", check ? "true" : "false");
 	printf("After a &= ~(1 << 6); //clear a bit %d\n", a);
     
